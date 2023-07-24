@@ -1,11 +1,13 @@
 import React from 'react'
 
-export default function StarwarsList({starwars}) {
+function StarwarsList({starwars}) {
   return (
     <div>
-        {starwars.map(p => (
-            <div key={p}>{p}</div>
+        {starwars.map((s) => (
+            <div key={s}>{s}</div>
         ))}
     </div>
   )
 }
+
+export default StarwarsList;

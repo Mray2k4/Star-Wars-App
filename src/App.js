@@ -10,6 +10,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState('https://swapi.dev/api/people/')
   const [nextPage, setNextPage] = useState()
   const [prevPage, setPrevPage] = useState()
+  const [loading, setLoading] = useState(true)
 
     useEffect(() => {
       axios.get(currentPage)
@@ -17,6 +18,8 @@ function App() {
         setNextPage(res.data.next)
         setPrevPage(res.data.previous)
         setStarwars(res.data.results.map(s => s.name))
+        setLoading(false)
+        
       })
 
   
@@ -32,6 +35,7 @@ function App() {
 
   return (
     <>
+      {loading ? <div>Is Loading...</div>: <div>{ StarwarsList }</div>}
       <StarwarsList starwars={starwars}/>
       <Pagination 
         goToNextPage={nextPage ? goToNextPage : null}
