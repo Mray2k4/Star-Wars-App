@@ -11,8 +11,9 @@ function App() {
   const [nextPage, setNextPage] = useState()
   const [prevPage, setPrevPage] = useState()
   const [loading, setLoading] = useState(true)
-  const [searchData, setSearchData] = useState([])
-  const [searchFilter, setSearchFilter] = useState([])
+  // const [searchData, setSearchData] = useState([])
+  // const [searchFilter, setSearchFilter] = useState([])
+  const [items, setItems] = useState([])
 
 
     useEffect(() => {
@@ -21,18 +22,18 @@ function App() {
         setNextPage(res.data.next)
         setPrevPage(res.data.previous)
         setStarwars(res.data.results)
-        setSearchData(res.data)
-        setSearchFilter(res.data)
+        // setSearchData(res.data)
+        // setSearchFilter(res.data)
         console.log(res)
         setLoading(false)
       })
     }, [currentPage])
 
 
-    function handleFilter (value) {
-      const res = searchFilter.filter(f => f.name.toLowerCase().includes(value))
-      setSearchData(res);
-    }
+    // function handleFilter (value) {
+    //   const res = searchFilter.filter(f => f.name.toLowerCase().includes(value))
+    //   setSearchData(res);
+    // }
 
 
     function goToNextPage() {
