@@ -1,10 +1,29 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import Search from './Search';
+import axios from 'axios';
 
 function StarwarsList({starwars}) {
+    // function inputFilter(event) {
+
+    // }
+
+    const [searchFilter, setSearchFilter] = useState([])
+    console.log(searchFilter)
+
+    useEffect(() => {
+        axios.get('https://swapi.dev/api/people/?search=')
+          .then(res => {
+            setSearchFilter(res.data)
+        })
+        .catch(err => console.log(err))
+      }, [])
+
   return (
     <div className='container'>
         <div className='mt-6'>
             <h3>Star Wars List</h3>
+            <Search/>
+            {/* <input type='text' placeholder='Search' onChange={(e) => searchFilter(e.target.value)}/> */}
             <table className='table'>
                 <thead>
                     <tr>

@@ -54,7 +54,7 @@ function App() {
         goToNextPage={nextPage ? goToNextPage : null}
         goToPrevPage={prevPage ? goToPrevPage : null}
       />
-      <Search/>
+
       {/* <div>
         <input type="text" placeholder='Search Here...' onChange={e => handleFilter(e.target.value)}/>
         {searchData.map((user, i) => {
