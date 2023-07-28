@@ -3,29 +3,28 @@ import axios from 'axios';
 
 function Search() {
     const [searchFilter, setSearchFilter] = useState([])
-    const [filterList, setFilterList] = useState('https://swapi.dev/api/people/?search=')
-    console.log(searchFilter)
+    const [searchData, setSearchData] = useState('https://swapi.dev/api/people/?search')
+    // console.log(searchFilter)
 
     useEffect(() => {
-        axios.get(filterList)
+        axios.get(searchData)
           .then(res => {
-            setSearchFilter(res.data)
-        })
+          setSearchFilter(res.data.results)
+        }
+  )
         .catch(err => console.log(err))
       }, [])
 
-        function handleChange(e) {
-            const search = e.target.value.toLowerCase()
-            const filterNames = searchFilter.filter(searchFilter => searchFilter.names.toLowerCase().includes(search))
-            setSearchFilter(filterNames)
-        }
-
+      function Filter (event) {
+        setSearchData(searchFilter.filter(f => f.name.toLowerCase().includes(event.target.value)))
+                  }
 
   return (
     <div>
-         <input type='text' placeholder='Search' onChange={(e) => handleChange(e)}/>
+         <input type='text' placeholder='Search' onChange={Filter}/>
+         
     </div>
   )
 }
 
-export default Search
+export default Search;

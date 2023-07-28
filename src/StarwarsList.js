@@ -3,17 +3,12 @@ import Search from './Search';
 import axios from 'axios';
 
 function StarwarsList({starwars}) {
-    // function inputFilter(event) {
-
-    // }
-
-    const [searchFilter, setSearchFilter] = useState([])
-    console.log(searchFilter)
+     const [getList, setGetList] = useState([])
 
     useEffect(() => {
-        axios.get('https://swapi.dev/api/people/?search=')
+        axios.get('https://swapi.dev/api/people/?search')
           .then(res => {
-            setSearchFilter(res.data)
+            setGetList(res.data.results)
         })
         .catch(err => console.log(err))
       }, [])
@@ -23,7 +18,6 @@ function StarwarsList({starwars}) {
         <div className='mt-6'>
             <h3>Star Wars List</h3>
             <Search/>
-            {/* <input type='text' placeholder='Search' onChange={(e) => searchFilter(e.target.value)}/> */}
             <table className='table'>
                 <thead>
                     <tr>
