@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function Search() {
     const [searchFilter, setSearchFilter] = useState([])
-    const [searchData, setSearchData] = useState('https://swapi.dev/api/people/?search')
+    const [searchData, setSearchData] = useState('https://swapi.dev/api/people/?search=')
     // console.log(searchFilter)
 
     useEffect(() => {
@@ -17,6 +17,7 @@ function Search() {
 
       function Filter (event) {
         setSearchData(searchFilter.filter(f => f.name.toLowerCase().includes(event.target.value)))
+
                   }
 
   return (

@@ -6,14 +6,14 @@ import Pagination from './Pagination';
 
 function App() {
   const [starwars, setStarwars] = useState([])
-  const [currentPage, setCurrentPage] = useState('https://swapi.dev/api/people/')
+  const [url, setUrl] = useState('https://swapi.dev/api/people/?search=')
   const [nextPage, setNextPage] = useState()
   const [prevPage, setPrevPage] = useState()
   const [loading, setLoading] = useState(true)
 
 
     useEffect(() => {
-      axios.get(currentPage)
+      axios.get(url)
         .then(res => {
         setNextPage(res.data.next)
         setPrevPage(res.data.previous)
@@ -21,18 +21,18 @@ function App() {
         console.log(res)
         setLoading(false)
       })
-    }, [currentPage])
+    }, [url])
 
 
 
 
     function goToNextPage() {
-      setCurrentPage(nextPage)
+      setUrl(nextPage)
     }
     
 
     function goToPrevPage() {
-      setCurrentPage(prevPage)
+      setUrl(prevPage)
     }
 
     
