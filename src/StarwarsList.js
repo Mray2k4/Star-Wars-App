@@ -4,20 +4,21 @@ import axios from 'axios';
 
 function StarwarsList({starwars}) {
      const [getList, setGetList] = useState([])
+     const [searchFilter, setSearchFilter] = useState([])
 
-    useEffect(() => {
-        axios.get('https://swapi.dev/api/people/?search')
-          .then(res => {
-            setGetList(res.data.results)
-        })
-        .catch(err => console.log(err))
-      }, [])
+    // useEffect(() => {
+    //     axios.get('https://swapi.dev/api/people/?search=')
+    //       .then(res => {
+    //         setGetList(res.data.results)
+    //     })
+    //     .catch(err => console.log(err))
+    //   }, [])
 
   return (
     <div className='container'>
         <div className='mt-6'>
             <h3>Star Wars List</h3>
-            <Search/>
+            <Search setSearchFilter={setSearchFilter}/>
             <table className='table'>
                 <thead>
                     <tr>
