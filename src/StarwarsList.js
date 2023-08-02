@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Search from './Search';
 import axios from 'axios';
 
-function StarwarsList({starwars}) {
+function StarwarsList({starwars, setStarwars, url}) {
      const [getList, setGetList] = useState([])
      const [searchFilter, setSearchFilter] = useState([])
 
@@ -18,7 +18,7 @@ function StarwarsList({starwars}) {
     <div className='container'>
         <div className='mt-6'>
             <h3>Star Wars List</h3>
-            <Search setSearchFilter={setSearchFilter}/>
+            <Search setStarwars={setStarwars} starwars={starwars} url={url}/>
             <table className='table'>
                 <thead>
                     <tr>
