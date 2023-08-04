@@ -40,7 +40,7 @@ function App() {
   return (
     <>
       {loading ? <div>Is Loading...</div>: <div>{ StarwarsList }</div>}
-      <StarwarsList starwars={starwars}/>
+      <StarwarsList starwars={starwars} setUrl={setUrl}/>
       <Pagination 
         goToNextPage={nextPage ? goToNextPage : null}
         goToPrevPage={prevPage ? goToPrevPage : null}

@@ -2,23 +2,17 @@ import React, {useState, useEffect} from 'react'
 import Search from './Search';
 import axios from 'axios';
 
-function StarwarsList({starwars, setStarwars, url}) {
+function StarwarsList({starwars, setStarwars, setUrl, url}) {
      const [getList, setGetList] = useState([])
      const [searchFilter, setSearchFilter] = useState([])
 
-    // useEffect(() => {
-    //     axios.get('https://swapi.dev/api/people/?search=')
-    //       .then(res => {
-    //         setGetList(res.data.results)
-    //     })
-    //     .catch(err => console.log(err))
-    //   }, [])
+
 
   return (
     <div className='container'>
         <div className='mt-6'>
             <h3>Star Wars List</h3>
-            <Search setStarwars={setStarwars} starwars={starwars} url={url}/>
+            <Search setStarwars={setStarwars} starwars={starwars} setUrl={setUrl}/>
             <table className='table'>
                 <thead>
                     <tr>
