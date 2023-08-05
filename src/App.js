@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import StarwarsList from './StarwarsList';
 import axios from 'axios';
 import Pagination from './Pagination';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function App() {

@@ -1,12 +1,6 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios';
+import React from 'react'
 
-function Search({setSearchFilter, starwars, setStarwars, setUrl, url}) {
-   
-  //   const handleFilter = (event) => {
-  //   setUrl = starwars.filter((user) => user.name.toLowerCase().includes(event.target.value));
-  //   console.log(setUrl)
-  // }
+function Search({setUrl}) {
 
   const handleFilter = (event) => {
    setUrl(`https://swapi.dev/api/people/?search=${event.target.value}`)
@@ -16,7 +10,7 @@ function Search({setSearchFilter, starwars, setStarwars, setUrl, url}) {
 
   return (
     <div>
-    <input type='text' placeholder='Search' onChange={handleFilter}/>
+    <input className='search' type='text' placeholder='Search' onChange={handleFilter}/>
     </div>
   )
 }

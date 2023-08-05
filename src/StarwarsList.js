@@ -1,20 +1,17 @@
 import React, {useState, useEffect} from 'react'
 import Search from './Search';
-import axios from 'axios';
+import { Table } from 'react-bootstrap';
 
-function StarwarsList({starwars, setStarwars, setUrl, url}) {
-     const [getList, setGetList] = useState([])
-     const [searchFilter, setSearchFilter] = useState([])
-
-
+function StarwarsList({starwars, setStarwars, setUrl}) {
+ 
 
   return (
     <div className='container'>
         <div className='mt-6'>
-            <h3>Star Wars List</h3>
+            <h3 className='header'>Star Wars List</h3>
             <Search setStarwars={setStarwars} starwars={starwars} setUrl={setUrl}/>
-            <table className='table'>
-                <thead>
+            <Table hover variant='dark'>
+                <thead variant='light'>
                     <tr>
                         <td>Name</td>
                         <td>Birth Date</td>
@@ -38,7 +35,7 @@ function StarwarsList({starwars, setStarwars, setUrl, url}) {
                         ))
                     }
                 </tbody>
-            </table>
+            </Table>
         </div>
     </div>
   )
