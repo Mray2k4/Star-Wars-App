@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   const [starwars, setStarwars] = useState([])
-  // const [url, setUrl] = useState('https://swapi.dev/api/people/?search=')
   const [url, setUrl] = useState('https://swapi.dev/api/people/?search=')
   const [nextPage, setNextPage] = useState()
   const [prevPage, setPrevPage] = useState()
@@ -27,7 +26,7 @@ function App() {
       })
     }, [url])
 
-
+    
 
 
     function goToNextPage() {
@@ -47,6 +46,7 @@ function App() {
       <Paginate 
         goToNextPage={nextPage ? goToNextPage : null}
         goToPrevPage={prevPage ? goToPrevPage : null}
+        starwars={starwars}
       />
     </>
   );
