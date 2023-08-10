@@ -14,16 +14,19 @@ import Pagination from 'react-bootstrap/Pagination';
 
 
 
-function Paginate({goToNextPage, goToPrevPage, starwars}) {
-  const [page, setPage] = useState(20);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const numberOfPages = Math.ceil(starwars.length)
-  const pages = [...Array(numberOfPages + 1).keys()].slice(1);
-  // const lastIndex = currentPage * page;
-  // const firstIndex = lastIndex - page;
+function Paginate({goToNextPage, goToPrevPage, starwars, pages, setCurrentPage, changePage}) {
+  // const [mypage, setMyPage] = useState(30);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const records = 10
+  // const numberOfPages = Math.ceil(starwars.length)
+  // const pages = [...Array(numberOfPages + 1).keys()].slice(1);
+  // const lastIndex = currentPage * records;
+  // const firstIndex = lastIndex - records;
   // const pageList = starwars.slice(firstIndex, lastIndex)
-  console.log(pages)
+  // console.log(firstIndex)
+
+
+
 
 
   return (
@@ -33,8 +36,15 @@ function Paginate({goToNextPage, goToPrevPage, starwars}) {
          {goToPrevPage && <a onClick={goToPrevPage} class="page-link" href='#'>Prev</a>}
         </li>
            {pages.map(page => 
-          <li class="page-link" key={page}>{page}</li>)}
-          <li class="page-item">
+            <li class= "page-item" 
+              key={page} 
+              >
+              <a class="page-link" href='!#' 
+                onClick={() => changePage(page)}>
+                {page}
+              </a>
+            </li>)}
+          <li class= "page-item">
        {goToNextPage && <a onClick={goToNextPage} class="page-link" href="#">Next</a>}
         </li>
         </ul>
