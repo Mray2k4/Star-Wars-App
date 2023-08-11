@@ -2,7 +2,7 @@ import React from 'react'
 import Search from './Search';
 import { Table } from 'react-bootstrap';
 
-function StarwarsList({starwars, setStarwars, setUrl, pages, pageList}) {
+function StarwarsList({starwars, setStarwars, setUrl, count, pageList}) {
  
 
   return (

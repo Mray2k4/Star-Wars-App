@@ -9,22 +9,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   const [starwars, setStarwars] = useState([])
   const [url, setUrl] = useState('https://swapi.dev/api/people/?search=')
-  const [count, setCount] = useState([])
+  const [count, setCount] = useState()
   const [nextPage, setNextPage] = useState()
   const [prevPage, setPrevPage] = useState()
   const [loading, setLoading] = useState(true)
  
 
   // Changing Pages //
-  const [mypage, setMyPage] = useState(30);
   const [currentPage, setCurrentPage] = useState(1);
-  const records = 10
+  const [eachPage, setEachPage] = useState(10);
   const numberOfPages = Math.ceil(starwars.length)
   const pages = [...Array(numberOfPages + 1).keys()].slice(1);
-  const lastIndex = currentPage * records;
-  const firstIndex = lastIndex - records;
+  const lastIndex = currentPage * count;
+  const firstIndex = lastIndex - count;
   const pageList = starwars.slice(firstIndex, lastIndex)
-  console.log(firstIndex)
+  console.log(lastIndex)
 
 
     useEffect(() => {
@@ -33,9 +32,9 @@ function App() {
         setNextPage(res.data.next)
         setPrevPage(res.data.previous)
         setStarwars(res.data.results)
-        setCount(res.data)
-        console.log(res)
+        setCount(res.data.count)
         setLoading(false)
+        console.log(res)
       })
     }, [url])
 
@@ -53,21 +52,22 @@ function App() {
 
     function changePage(name) {
       setCurrentPage(name)
+      console.log(setCurrentPage)
     }
 
     
   return (
     <>
       {loading ? <div>Is Loading...</div>: <div>{ StarwarsList }</div>}
-      <StarwarsList starwars={starwars} setUrl={setUrl}/>
+      <StarwarsList  setUrl={setUrl} starwars={pageList}/>
       <Paginate 
         goToNextPage={nextPage ? goToNextPage : null}
         goToPrevPage={prevPage ? goToPrevPage : null}
-        starwars={pages}
+        // count={pageList}
         setCurrentPage={setCurrentPage}
         pages={pages}
         changePage={changePage}
-        pageList={pageList}
+        // pageList={pageList}
        
       />
     </>
