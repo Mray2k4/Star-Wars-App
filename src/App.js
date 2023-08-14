@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import StarwarsList from './StarwarsList';
 import axios from 'axios';
-import Paginate from './Paginate';
+import Pagination from './Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -20,8 +20,8 @@ function App() {
   const [eachPage, setEachPage] = useState(10);
   const numberOfPages = Math.ceil(starwars.length)
   const pages = [...Array(numberOfPages + 1).keys()].slice(1);
-  const lastIndex = currentPage * count;
-  const firstIndex = lastIndex - count;
+  const lastIndex = currentPage * eachPage;
+  const firstIndex = lastIndex - eachPage;
   const pageList = starwars.slice(firstIndex, lastIndex)
   console.log(lastIndex)
 
@@ -50,9 +50,9 @@ function App() {
       setUrl(prevPage)
     }
 
-    function changePage(name) {
-      setCurrentPage(name)
-      console.log(setCurrentPage)
+    function changePage(page) {
+      setCurrentPage(page)
+
     }
 
     
@@ -60,7 +60,7 @@ function App() {
     <>
       {loading ? <div>Is Loading...</div>: <div>{ StarwarsList }</div>}
       <StarwarsList  setUrl={setUrl} starwars={pageList}/>
-      <Paginate 
+      <Pagination 
         goToNextPage={nextPage ? goToNextPage : null}
         goToPrevPage={prevPage ? goToPrevPage : null}
         // count={pageList}

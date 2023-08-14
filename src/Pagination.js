@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Paginate({goToNextPage, goToPrevPage, pages, changePage}) {
+function Pagination({goToNextPage, goToPrevPage, pages, changePage}) {
 
   return (
       <div aria-label="Page navigation example">
@@ -26,4 +26,4 @@ function Paginate({goToNextPage, goToPrevPage, pages, changePage}) {
   );
 }
 
-export default Paginate;
+export default Pagination;
