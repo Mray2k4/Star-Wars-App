@@ -16,14 +16,14 @@ function App() {
  
 
   // Changing Pages //
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState();
   const [eachPage, setEachPage] = useState(10);
   const numberOfPages = Math.ceil(starwars.length)
   const pages = [...Array(numberOfPages + 1).keys()].slice(1);
   const lastIndex = currentPage * eachPage;
   const firstIndex = lastIndex - eachPage;
   const pageList = starwars.slice(firstIndex, lastIndex)
-  console.log(lastIndex)
+  console.log(currentPage)
 
 
     useEffect(() => {
@@ -32,7 +32,7 @@ function App() {
         setNextPage(res.data.next)
         setPrevPage(res.data.previous)
         setStarwars(res.data.results)
-        setCount(res.data.count)
+        setCount(res.data.next)
         setLoading(false)
         console.log(res)
       })
@@ -51,9 +51,18 @@ function App() {
     }
 
     function changePage(page) {
-      setCurrentPage(page)
+     setCurrentPage(page)
+     setUrl(`https://swapi.dev/api/people/?search=&page=${currentPage}`)
 
     }
+    // function changePage(nextPage) {
+    //   setCurrentPage(nextPage)
+      
+    //  }
+    // function changePage() {
+    //   setUrl(nextPage)
+      
+    //  }
 
     
   return (

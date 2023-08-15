@@ -1,6 +1,8 @@
 import React from 'react';
 
-function Pagination({goToNextPage, goToPrevPage, pages, changePage}) {
+function Pagination({goToNextPage, goToPrevPage, pages, changePage, setUrl}) {
+
+ 
 
   return (
       <div aria-label="Page navigation example">
@@ -12,10 +14,11 @@ function Pagination({goToNextPage, goToPrevPage, pages, changePage}) {
             <li class= "page-item" 
               key={page} 
               >
-              <a class="page-link" href='!#' 
+              {changePage && <a class="page-link" href='!#' 
+                // onClick={() => changePage(page)}>
                 onClick={() => changePage(page)}>
                 {page}
-              </a>
+              </a>}
             </li>)}
           <li class= "page-item">
        {goToNextPage && <a onClick={goToNextPage} class="page-link" href="!#">Next</a>}
