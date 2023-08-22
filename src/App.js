@@ -30,7 +30,18 @@ function App(getPlanets, setGetPlanets) {
           .then(response => {
             char.homeworld = response.data.name
           })
-          return char
+
+          axios.get(char.species)
+          .then(response => {
+            char.species = response.data.name
+          })
+          
+          if(char.species !== characters) {
+            char.species = 'Human';
+          } else {
+          return char;
+          }
+          console.log(characters)
         })
         setStarwars(characters)
         setLoading(false)
