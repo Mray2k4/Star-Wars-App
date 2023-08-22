@@ -25,7 +25,7 @@ function StarwarsList({starwars, setStarwars, setUrl}) {
                     {
                         starwars.map((user, index) => (
                          <tr key={index}>
-                             <td>{user.name} </td>
+                             <td>{user.name}</td>
                              <td>{user.birth_year}</td>
                              <td>{user.height}</td>
                              <td>{user.mass}</td>

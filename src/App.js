@@ -6,41 +6,40 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-function App() {
-  const [starwars, setStarwars] = useState([])
-  const [url, setUrl] = useState('https://swapi.dev/api/people/')
-  const [count, setCount] = useState()
-  const [nextPage, setNextPage] = useState()
-  const [prevPage, setPrevPage] = useState()
-  const [loading, setLoading] = useState(true)
-
-
+function App(getPlanets, setGetPlanets) {
+  const [starwars, setStarwars] = useState([]);
+  const [url, setUrl] = useState('https://swapi.dev/api/people/');
+  const [loading, setLoading] = useState(true);
 
   // Changing Pages //
+  const [nextPage, setNextPage] = useState();
+  const [prevPage, setPrevPage] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const numberOfPages = Math.ceil(starwars.length)
+  const numberOfPages = Math.ceil(starwars.length);
   const pages = [...Array(numberOfPages).keys()].slice(1);
-  console.log(currentPage)
-
+  // console.log(getPlanets);
 
   useEffect(() => {
     axios.get(url)
       .then((res) => {
         setNextPage(res.data.next)
         setPrevPage(res.data.previous)
-        setStarwars(res.data.results)
-        setCount(res.data.next)
+        const characters = res.data.results
+        characters.map((char) => {
+          axios.get(char.homeworld)
+          .then(response => {
+            char.homeworld = response.data.name
+          })
+          return char
+        })
+        setStarwars(characters)
         setLoading(false)
         console.log(res)
       })
   }, [url])
 
 
-
-
-
-
-
+  // Next and Previous Pages //
   function goToNextPage() {
     setUrl(nextPage)
   }
@@ -52,7 +51,6 @@ function App() {
   function changePage(page) {
     setCurrentPage(page)
     setUrl(`https://swapi.dev/api/people/?search=&page=${page}`)
-
   }
 
 
@@ -66,7 +64,8 @@ function App() {
         setCurrentPage={setCurrentPage}
         pages={pages}
         changePage={changePage}
-        count={count}
+        getPlanets={getPlanets}
+        setGetPlanets={setGetPlanets}
 
       />
     </>

@@ -8,7 +8,7 @@ function Pagination({goToNextPage, goToPrevPage, pages, changePage}) {
       <div aria-label="Page navigation example">
          <ul class="pagination justify-content-center">
           <li class="page-item">
-         <a onClick={goToPrevPage} class="page-link" href='!#'>Prev</a>
+      <a onClick={goToPrevPage} class="page-link" href='!#'>Prev</a>
         </li>
            {pages.map(page => 
             <li class= "page-item" 
