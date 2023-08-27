@@ -69,13 +69,13 @@ function App(getPlanets, setGetPlanets) {
             getPlanets()
           })
 
-          // people.map((peep) => {
-          //   async function getSpecies() {
-          //   const res = await axios.get(peep.species)
-          //     peep.species = res.data.name
-          //   }
-          //   getSpecies()
-          // })
+          people.map((peep) => {
+            async function getSpecies() {
+            const res = await axios.get(peep.species)
+              peep.species = res.data.name
+            }
+            getSpecies()
+          })
         
           setNextPage(res.data.next)
           setPrevPage(res.data.previous)
