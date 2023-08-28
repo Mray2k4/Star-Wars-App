@@ -22,72 +22,85 @@ function App(getPlanets, setGetPlanets) {
 
   // Code With No Async//
 
-  // useEffect(() => {
-  //   axios.get(url)
-  //     .then((res) => {
+  useEffect(() => {
+    axios.get(url)
+      .then((res) => {
         
-  //       const characters = res.data.results;
-  //       characters.map((char) => {
-  //         axios.get(char.homeworld)
-  //         .then(response => {
-  //           char.homeworld = response.data.name;
-  //         })
+        const characters = res.data.results;
+        characters.map((char) => {
+          axios.get(char.homeworld)
+          .then(response => {
+            char.homeworld = response.data.name;
+          })
 
-  //         // axios.get(char.species)
-  //         // .then(response => {
-  //         //   char.species = response.data.name
-  //         // })
+          axios.get(char.species)
+          .then(response => {
+            char.species = response.data.name
+          })
 
-  //         // if(char.species !== characters) {
-  //         //   char.species = 'Human';
-  //         // } else {
-  //         // return char;
-  //         // }
-  //       })
-  //       setNextPage(res.data.next)
-  //       setPrevPage(res.data.previous)
-  //       setStarwars(characters)
-  //       setLoading(false)
-  //       console.log(characters)
-  //     })
-  // }, [url])
+          if(char.species !== characters) {
+            char.species = 'Human';
+          } else {
+          return char.species;
+          }
+        })
+        setNextPage(res.data.next)
+        setPrevPage(res.data.previous)
+        setStarwars(characters)
+        setLoading(false)
+        console.log(characters)
+      })
+  }, [url])
 
 
   // Async function //
 
-  useEffect(() => {
-    async function getData() {
-          const res = await axios.get(url)
-          const characters = res.data.results
-          const people = res.data.results
+  // useEffect(() => {
+  //   async function getData() {
+  //         const res = await axios.get(url)
+  //         const characters = res.data.results
+  //         const people = res.data.results
 
-          characters.map((char) => {
-            async function getPlanets() {
-            const res = await axios.get(char.homeworld)
-              char.homeworld = res.data.name
-            }
-            getPlanets()
-          })
+  //         characters.map((char) => {
+  //           async function getPlanets() {
+  //           const res = await axios.get(char.homeworld)
+  //             char.homeworld = res.data.name
+  //           }
+  //           getPlanets()
+  //         })
 
-          people.map((peep) => {
-            async function getSpecies() {
-            const res = await axios.get(peep.species)
-              peep.species = res.data.name
-            }
-            getSpecies()
-          })
+  //         people.map((peep) => {
+  //           async function getSpecies() {
+  //           const res = await axios.get(peep.species)
+  //             peep.species = res.data.name
+  //           }
+  //           if(peep.species !== characters) {
+  //             peep.species = 'Human';
+  //           } else {
+  //           return peep;
+  //           }
+            
+  //           getSpecies()
+  //         })
         
-          setNextPage(res.data.next)
-          setPrevPage(res.data.previous)
-          setStarwars(res.data.results)
-          setLoading(false)
-          console.log(res)
-          console.log(characters)
+  //         setNextPage(res.data.next)
+  //         setPrevPage(res.data.previous)
+  //         setStarwars(res.data.results)
+  //         setLoading(false)
+  //         console.log(res)
+  //         console.log(characters)
         
-        }
-      getData()
-    }, [url])
+  //       }
+  //     getData()
+  //   }, [url])
 
+
+    // Loading Page //
+    function pageLoading() {
+      if (loading) {
+        return <h3>Is Loading...</h3>
+      }
+    } 
 
   // Next and Previous Pages //
   function goToNextPage() {
@@ -106,19 +119,18 @@ function App(getPlanets, setGetPlanets) {
 
   return (
     <>
-      {/* {loading ? <div>Is Loading...</div> : <div>{StarwarsList}</div>} */}
-      {loading && <div>Is Loading...</div>}
-      <StarwarsList setUrl={setUrl} starwars={starwars} />
+      <StarwarsList
+       setUrl={setUrl}
+        starwars={starwars}
+      />
       <Pagination
         goToNextPage={goToNextPage}
         goToPrevPage={goToPrevPage}
         setCurrentPage={setCurrentPage}
         pages={pages}
         changePage={changePage}
-        getPlanets={getPlanets}
-        setGetPlanets={setGetPlanets}
-
       />
+      {pageLoading()}
     </>
   );
 }

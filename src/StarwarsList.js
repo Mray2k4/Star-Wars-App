@@ -8,7 +8,7 @@ function StarwarsList({starwars, setStarwars, setUrl}) {
   return (
     <div className='container'>
         <div className='mt-6'>
-            <h3 className='header'>Star Wars List</h3>
+            <h2 className='header'>Star Wars List</h2>
             <Search setStarwars={setStarwars} starwars={starwars} setUrl={setUrl}/>
             <Table hover variant='dark'>
                 <thead variant='light'>

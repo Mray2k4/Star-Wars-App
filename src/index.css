@@ -28,3 +28,7 @@ code {
 thead {
   background-color: dark gray;
 }
+
+h3 {
+  text-align: center;
+}
