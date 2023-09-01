@@ -85,9 +85,16 @@ function App(getPlanets, setGetPlanets) {
           for (const key of characters) { 
             const character = await axios.get(key.homeworld)
                key.homeworld = character.data.name
-       
-             console.log(key.homeworld)
+               console.log(key.homeworld)
           }
+
+          for (const key of people) { 
+            const peep = await axios.get(key.species)
+               key.species = peep.data.name
+               console.log(key.species)
+          }
+
+
           
           // characters.map((char) => {
           //   async function getPlanets() {
