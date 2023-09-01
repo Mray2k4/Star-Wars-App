@@ -10,6 +10,7 @@ function App(getPlanets, setGetPlanets) {
   const [starwars, setStarwars] = useState([]);
   const [url, setUrl] = useState('https://swapi.dev/api/people/');
   const [loading, setLoading] = useState(true);
+  console.log(url)
 
   // Changing Pages //
   const [nextPage, setNextPage] = useState();
@@ -18,81 +19,110 @@ function App(getPlanets, setGetPlanets) {
   const numberOfPages = Math.ceil(starwars.length);
   const pages = [...Array(numberOfPages).keys()].slice(1);
   
+  // for (const key of characters) { 
+  //   const character = await axios.get(key.homeworld)
+  //      key.homeworld = character.data.name
+
+  //    console.log(key.homeworld)
 
 
   // Code With No Async//
 
-  useEffect(() => {
-    axios.get(url)
-      .then((res) => {
+  // useEffect(() => {
+  //   axios.get(url)
+  //     .then((res) => {
         
-        const characters = res.data.results;
-        characters.map((char) => {
-          axios.get(char.homeworld)
-          .then(response => {
-            char.homeworld = response.data.name;
-          })
+  //       const characters = res.data.results;
+  //       characters.map((char) => {
+  //         axios.get(char.homeworld)
+  //         .then(response => {
+  //           char.homeworld = response.data.name;
+  //         })
 
-          axios.get(char.species)
-          .then(response => {
-            char.species = response.data.name
-          })
+  //         axios.get(char.species)
+  //         .then(response => {
+  //           char.species = response.data.name
+  //         })
 
-          if(char.species !== characters) {
-            char.species = 'Human';
-          } else {
-          return char.species;
-          }
-        })
-        setNextPage(res.data.next)
-        setPrevPage(res.data.previous)
-        setStarwars(characters)
-        setLoading(false)
-        console.log(characters)
-      })
-  }, [url])
+  //         if(char.species !== characters) {
+  //           char.species = 'Human';
+  //         } else {
+  //         return char.species;
+  //         }
+  //       })
+  //       setNextPage(res.data.next)
+  //       setPrevPage(res.data.previous)
+  //       setStarwars(res.data.results)
+  //       setLoading(false)
+  //       console.log(characters)
+  //     })
+  // }, [url])
 
 
   // Async function //
 
-  // useEffect(() => {
-  //   async function getData() {
-  //         const res = await axios.get(url)
-  //         const characters = res.data.results
-  //         const people = res.data.results
+  useEffect(() => {
+    async function getData() {
+          const res = await axios.get(url)
+          const characters = res.data.results
+          const people = res.data.results
 
-  //         characters.map((char) => {
-  //           async function getPlanets() {
-  //           const res = await axios.get(char.homeworld)
-  //             char.homeworld = res.data.name
-  //           }
-  //           getPlanets()
-  //         })
 
-  //         people.map((peep) => {
-  //           async function getSpecies() {
-  //           const res = await axios.get(peep.species)
-  //             peep.species = res.data.name
-  //           }
-  //           if(peep.species !== characters) {
-  //             peep.species = 'Human';
-  //           } else {
-  //           return peep;
-  //           }
+          // for (const key of characters) { 
+          //   async function getPlanets() {
+          //       const character = await axios.get(key.homeworld)
+          //         key.homeworld = character.data.name
+          //       }
+          //       console.log(key.homeworld)
+          //       getPlanets()
+          //   // if (Object.hasOwnProperty.call(res, key)) {
+          //   //   const character = res[key];
+          //   //   console.log(character)
+          //   // }
+          // }
+      
+
+          for (const key of characters) { 
+            const character = await axios.get(key.homeworld)
+               key.homeworld = character.data.name
+       
+             console.log(key.homeworld)
+          }
+          
+          // characters.map((char) => {
+          //   async function getPlanets() {
+          //   const res = await axios.get(char.homeworld)
+          //     char.homeworld = res.data.name
+          //   }
+          //   console.log(char.homeworld)
+          //   getPlanets()
+          // })
+
+          // people.map((peep) => {
+          //   async function getSpecies() {
+          //   const res = await axios.get(peep.species)
+          //     peep.species = res.data.name
+          //   }
             
-  //           getSpecies()
-  //         })
+          //   if(peep.species !== characters) {
+          //     peep.species = 'Human';
+          //   } else {
+          //   return peep;
+          //   }
+            
+          //   getSpecies()
+          // })
         
-  //         setNextPage(res.data.next)
-  //         setPrevPage(res.data.previous)
-  //         setStarwars(res.data.results)
-  //         setLoading(false)
-  //         console.log(res)
-  //         console.log(characters)
+          setNextPage(res.data.next)
+          setPrevPage(res.data.previous)
+          setStarwars(res.data.results)
+          setLoading(false)
+          console.log(res)
+          console.log(characters)
         
-  //       }
-  //     getData()
-  //   }, [url])
+        }
+      getData()
+    }, [url])
 
 
     // Loading Page //
