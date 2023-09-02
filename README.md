@@ -1,6 +1,6 @@
 # Star Wars App
 
-Check it out [here](https://starwars-app-3f5084ab17fb.herokuapp.com/#)
+Check it out [here](https://starwars-app-3f5084ab17fb.herokuapp.com/)
 
 
 ![Screenshot Star Wars App](https://github.com/Mray2k4/Star-Wars-App/assets/99221965/bf39bd0e-bd4b-4b44-9fc3-82266b282597)
