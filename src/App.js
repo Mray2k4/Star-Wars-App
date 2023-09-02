@@ -6,138 +6,53 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-function App(getPlanets, setGetPlanets) {
+function App() {
   const [starwars, setStarwars] = useState([]);
   const [url, setUrl] = useState('https://swapi.dev/api/people/');
   const [loading, setLoading] = useState(true);
-  console.log(url)
-
+ 
   // Changing Pages //
   const [nextPage, setNextPage] = useState();
   const [prevPage, setPrevPage] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const numberOfPages = Math.ceil(starwars.length);
   const pages = [...Array(numberOfPages).keys()].slice(1);
-  
-  // for (const key of characters) { 
-  //   const character = await axios.get(key.homeworld)
-  //      key.homeworld = character.data.name
-
-  //    console.log(key.homeworld)
-
-
-  // Code With No Async//
-
-  // useEffect(() => {
-  //   axios.get(url)
-  //     .then((res) => {
-        
-  //       const characters = res.data.results;
-  //       characters.map((char) => {
-  //         axios.get(char.homeworld)
-  //         .then(response => {
-  //           char.homeworld = response.data.name;
-  //         })
-
-  //         axios.get(char.species)
-  //         .then(response => {
-  //           char.species = response.data.name
-  //         })
-
-  //         if(char.species !== characters) {
-  //           char.species = 'Human';
-  //         } else {
-  //         return char.species;
-  //         }
-  //       })
-  //       setNextPage(res.data.next)
-  //       setPrevPage(res.data.previous)
-  //       setStarwars(res.data.results)
-  //       setLoading(false)
-  //       console.log(characters)
-  //     })
-  // }, [url])
-
-
-  // Async function //
 
   useEffect(() => {
     async function getData() {
-          const res = await axios.get(url)
-          const characters = res.data.results
-          const people = res.data.results
+      const res = await axios.get(url)
+      const characters = res.data.results
+      const people = res.data.results
 
-
-          // for (const key of characters) { 
-          //   async function getPlanets() {
-          //       const character = await axios.get(key.homeworld)
-          //         key.homeworld = character.data.name
-          //       }
-          //       console.log(key.homeworld)
-          //       getPlanets()
-          //   // if (Object.hasOwnProperty.call(res, key)) {
-          //   //   const character = res[key];
-          //   //   console.log(character)
-          //   // }
-          // }
-      
-
-          for (const key of characters) { 
-            const character = await axios.get(key.homeworld)
-               key.homeworld = character.data.name
-               console.log(key.homeworld)
-          }
-
-          for (const key of people) { 
-            const peep = await axios.get(key.species)
-               key.species = peep.data.name
-               console.log(key.species)
-          }
-
-
-          
-          // characters.map((char) => {
-          //   async function getPlanets() {
-          //   const res = await axios.get(char.homeworld)
-          //     char.homeworld = res.data.name
-          //   }
-          //   console.log(char.homeworld)
-          //   getPlanets()
-          // })
-
-          // people.map((peep) => {
-          //   async function getSpecies() {
-          //   const res = await axios.get(peep.species)
-          //     peep.species = res.data.name
-          //   }
-            
-          //   if(peep.species !== characters) {
-          //     peep.species = 'Human';
-          //   } else {
-          //   return peep;
-          //   }
-            
-          //   getSpecies()
-          // })
-        
-          setNextPage(res.data.next)
-          setPrevPage(res.data.previous)
-          setStarwars(res.data.results)
-          setLoading(false)
-          console.log(res)
-          console.log(characters)
-        
+      for (const key of characters) {
+        const character = await axios.get(key.homeworld)
+        key.homeworld = character.data.name
+        if (key.species == '') {
+          key.species = 'Human';
+        } else {
+          const peoples = await axios.get(key.species)
+          key.species = peoples.data.name
         }
-      getData()
-    }, [url])
-
-
-    // Loading Page //
-    function pageLoading() {
-      if (loading) {
-        return <h3>Is Loading...</h3>
       }
-    } 
+
+      setNextPage(res.data.next)
+      setPrevPage(res.data.previous)
+      setStarwars(res.data.results)
+      setLoading(false)
+      console.log(res)
+      console.log(characters)
+
+    }
+    getData()
+  }, [url])
+
+
+  // Loading Page //
+  function pageLoading() {
+    if (loading) {
+      return <h3>Is Loading...</h3>
+    }
+  }
 
   // Next and Previous Pages //
   function goToNextPage() {
@@ -157,7 +72,7 @@ function App(getPlanets, setGetPlanets) {
   return (
     <>
       <StarwarsList
-       setUrl={setUrl}
+        setUrl={setUrl}
         starwars={starwars}
       />
       <Pagination

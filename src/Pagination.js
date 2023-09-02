@@ -2,8 +2,6 @@ import React from 'react';
 
 function Pagination({goToNextPage, goToPrevPage, pages, changePage}) {
 
- 
-
   return (
       <div aria-label="Page navigation example">
          <ul class="pagination justify-content-center">
