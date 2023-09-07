@@ -2,7 +2,7 @@ import React from 'react'
 import Search from './Search';
 import { Table } from 'react-bootstrap';
 
-function StarwarsList({ starwars, setStarwars, setUrl }) {
+function StarwarsList({ starwars, setStarwars, setUrl, setLoading }) {
 
     return (
         <div className='container'>

@@ -20,6 +20,7 @@ function App() {
 
   useEffect(() => {
     async function getData() {
+      setLoading(true)
       const res = await axios.get(url)
       const characters = res.data.results
       const people = res.data.results
@@ -74,6 +75,7 @@ function App() {
       <StarwarsList
         setUrl={setUrl}
         starwars={starwars}
+        setLoading={setLoading}
       />
       <Pagination
         goToNextPage={goToNextPage}
